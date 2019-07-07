@@ -1,0 +1,21 @@
+1.	基于你对springboot的理解描述一下什么是springboot
+在没有sringboot之前，搭建基于spring框架构建的项目需要大量的xml配置，相当繁琐，管理工作量大，springboot就是来简化这些配置，帮助开发者快速构建项目的，它把大家常用的一些配置默认实现了，正所谓约定优于配置，同时他提供了灵活的配置让开发者根据实际项目调整配置，优化spring容器的启动，所以说他是一个服务于框架的框架。
+2.	约定优于配置指的是什么？
+约定优于配置指的构建项目时一些约定俗成的配置都设置为默认值，减少重复劳动，比如：
+1）	maven目录结构默认有resources文件夹存放配置文件，打包方式默认为jar包
+2）	web项目默认包含springmvc相关依赖以及内置的tomcat容器
+3）	默认提供application.properties配置文件
+等等等等
+3.@SpringBootApplication由哪几个注解组成，这几个注解分别表示什么作用
+主要由3个注解组成：
+@Configuration
+@EnableAutoConfiguration
+@ComponentScan
+Configuration是一种通过注解装载bean的方式
+EnableAutoConfiguration通过自助装配的方式注入bean，并且提供配置方式可以进行过滤，来实现优化装载
+ComponentScan通过引入其他配置文件来实现装载
+4.springboot自动装配的实现原理
+通过实现ImportSelector中的selectImports方法来装载需要加载的bean，需要加载的bean在spring.factories中配置，过滤条件在/META-INF/spring-autoconfigure-metadata.properties中配置
+
+5.spring中的spi机制的原理是什么？
+在META-INF目录下，添加spring.factories文件，里面配置需要装载的bean，key是springboot定义的各种Listener、Configuration、Filter等信息
